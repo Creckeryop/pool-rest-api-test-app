@@ -51,7 +51,7 @@ class PoolService(
 
     @Throws(IllegalArgumentFoundException::class)
     fun addHoliday(date: LocalDate) {
-        if (holidayRepository.findByDate(date) == null)
+        if (holidayRepository.findByDate(date) != null)
             throw IllegalArgumentFoundException("Holiday with given date already exists")
         holidayRepository.save(Holiday(-1, date))
     }

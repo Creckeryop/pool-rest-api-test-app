@@ -11,9 +11,9 @@ import javax.validation.constraints.NotBlank
 class Holiday(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int,
+    var id: Int = -1,
 
     @NotBlank
     @Column(name = "date", unique = true)
-    var date: LocalDate
+    var date: LocalDate = LocalDate.now()
 )

@@ -10,13 +10,13 @@ import javax.validation.constraints.NotNull
 class Ticket(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int,
+    var id: Int = -1,
 
     @NotNull
     @Column(name = "time")
-    var time: Int,
+    var time: Int = 0,
 
     @ManyToOne(optional = false)
     @JoinColumn(name="order_id")
-    var order: Order
+    var order: Order = Order()
 )

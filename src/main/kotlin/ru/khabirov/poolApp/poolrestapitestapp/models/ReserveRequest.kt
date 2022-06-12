@@ -13,5 +13,5 @@ class ReserveRequest(
     )
     val dateTime: String,
     @field:Positive(message = "Duration value should be positive")
-    val duration: Int = 0
+    val duration: Int = 1
 )

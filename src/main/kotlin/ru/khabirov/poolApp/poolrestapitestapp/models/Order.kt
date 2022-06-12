@@ -14,17 +14,17 @@ class Order(
     @Id
     @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var orderId: Int,
+    var orderId: Int = -1,
 
     @NotNull
     @Future
     @Column(name = "date")
-    var date: LocalDate,
+    var date: LocalDate = LocalDate.now(),
 
     @NotNull
     @OneToOne
     @JoinColumn(name = "client_id")
-    var client: Client,
+    var client: Client = Client(),
 
     @JsonIgnore
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = [CascadeType.REMOVE], orphanRemoval = true)
