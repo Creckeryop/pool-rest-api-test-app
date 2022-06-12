@@ -1,0 +1,32 @@
+services:
+    database:
+        image: mysql:latest
+        ports:
+            - 3306:3306
+        healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 20s
+            retries: 10
+        environment:
+            MYSQL_ROOT_PASSWORD: kiaiisipa
+            MYSQL_PASSWORD: kiaiisipa
+            MYSQL_DATABASE: restapi
+            
+    poolapp:
+        depends_on:
+            database:
+                condition: service_healthy
+        ports:
+            - 8080:8080
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        environment:
+            BOT_USERNAME: 
+            BOT_TOKEN: 
+            DATABASE_URL: jdbc:mysql://database:3306
+            DATABASE_NAME: restapi
+            DATABASE_USERNAME: root
+            DATABASE_PASSWORD: kiaiisipa
+        entrypoint: sh
+        command: -c 'java -jar /usr/local/lib/pool-rest-api-test-app.war'
